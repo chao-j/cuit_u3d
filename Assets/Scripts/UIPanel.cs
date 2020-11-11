@@ -9,7 +9,7 @@ public class UIPanel : MonoBehaviour
     public RawImage charaBImg;
     public Image digBgImg;
     public Text digText;
-
+    public Canvas canvas;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +21,14 @@ public class UIPanel : MonoBehaviour
     {
         
     }
+
+    // 控制整个画布显示
+    public void ShowCanvas(bool isShow)
+    {
+        canvas.enabled = isShow;
+    }
+
+
     // 控制主角色显示
     public void ShowCharaA(bool isShow)
     {
@@ -49,4 +57,14 @@ public class UIPanel : MonoBehaviour
         digText.text = text;
     }
 
+    // 改变人物图片
+    public void ChangeCharaATex(Texture tex)
+    {
+        charaAImg.texture = tex;
+    }
+
+    public void ChangeCharaBTex(Texture tex)
+    {
+        charaBImg.texture = tex;
+    }
 }

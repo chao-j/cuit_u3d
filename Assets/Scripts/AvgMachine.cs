@@ -14,9 +14,16 @@ public class AvgMachine : MonoBehaviour
     public STATE state;
 
     private bool justEnter;
-    public Story01 data;
+    public AvgData data;
     public AvgAssetConfig asset;
     public UIPanel uiPanel;
+
+    [Range(5,20)]
+    public float typingSpeed = 10f;
+
+    private string targetString;
+    private float timerValue;
+
     [SerializeField]
     private int curLine;
     void Start()
@@ -43,10 +50,13 @@ public class AvgMachine : MonoBehaviour
                 {
                     // 第一次进入typing
                     ShowUI();
-                    LoadContent(data.dataList[curLine].Dialogtext, data.dataList[curLine].Charaadisplay, data.dataList[curLine].Charabdisplay);
+                    LoadContent(data.contents[curLine].dialogText, data.contents[curLine].showA, data.contents[curLine].showB);
                     justEnter = false;
+                    timerValue = 0;
                 }
                 CheckTypingFinished();
+                // 逐字显示文字
+                UpdateContentString();
                 break;
             case STATE.PAUSE:
                 if (justEnter)
@@ -75,7 +85,7 @@ public class AvgMachine : MonoBehaviour
                 break;
             case STATE.PAUSE:
                 NextLine();
-                if (curLine >= data.dataList.Count)
+                if (curLine >= data.contents.Count)
                 {
                     GoToState(STATE.OFF);
                 }
@@ -92,7 +102,12 @@ public class AvgMachine : MonoBehaviour
     {
         if (state == STATE.TYPING)
         {
-            GoToState(STATE.PAUSE);
+            // 整句话已经完全显示，切换状态
+            int subLen = (int)Mathf.Floor(timerValue * typingSpeed);
+            if (subLen >= targetString.Length)
+            {
+                GoToState(STATE.PAUSE);
+            }
         }
     }
 
@@ -107,7 +122,7 @@ public class AvgMachine : MonoBehaviour
         HideUI();
         curLine = 0;
         uiPanel.SetDigText("");
-        LoadContent(data.dataList[curLine].Dialogtext, data.dataList[curLine].Charaadisplay, data.dataList[curLine].Charabdisplay);
+        LoadContent(data.contents[curLine].dialogText, data.contents[curLine].showA, data.contents[curLine].showB);
     }
 
     private void ShowUI()
@@ -125,14 +140,24 @@ public class AvgMachine : MonoBehaviour
         curLine++;
     }
 
-    private void LoadText(string text)
-    {
-        uiPanel.SetDigText(text);
-    }
+    //private void LoadText(string text)
+    //{
+    //    uiPanel.SetDigText(text);
+    //}
 
+    
+    private void UpdateContentString()
+    {
+        // 打字机效果
+        timerValue += Time.deltaTime;
+        int subLen = (int)Mathf.Floor(timerValue * typingSpeed);
+        string tempString = targetString.Substring(0, Mathf.Min(subLen,targetString.Length));
+        uiPanel.SetDigText(tempString);
+    }
     private void LoadContent(string text,bool showA,bool showB)
     {
-        uiPanel.SetDigText(text);
+        //uiPanel.SetDigText(text);
+        targetString = text;
         uiPanel.ShowCharaA(showA);
         uiPanel.ShowCharaB(showB);
     }

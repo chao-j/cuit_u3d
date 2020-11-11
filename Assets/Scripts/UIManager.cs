@@ -23,4 +23,11 @@ public class UIManager : MonoBehaviour
             machine.UserClicked();
         }
     }
+
+    public void startAvg(AvgData data,AvgAssetConfig team)
+    {
+        machine.data = data;
+        machine.asset = team;
+        machine.startAvg();
+    }
 }

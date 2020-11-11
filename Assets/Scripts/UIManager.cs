@@ -5,7 +5,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     //public List<string> contents;
-    public AvgData data;
+    public Story01 data;
     public AvgAssetConfig asset;
     public UIPanel uiPanel;
     [SerializeField]
@@ -29,11 +29,11 @@ public class UIManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             NextLine();
-            if (curLine >= data.contents.Count)
+            if (curLine >= data.dataList.Count)
             {
                 Init();
             }
-            LoadContent(data.contents[curLine].dialogText,data.contents[curLine].showA, data.contents[curLine].showB);
+            LoadContent(data.dataList[curLine].Dialogtext,data.dataList[curLine].Charaadisplay, data.dataList[curLine].Charabdisplay);
         }
     }
 
@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
         HideUI();
         curLine = 0;
         uiPanel.SetDigText("");
-        LoadContent(data.contents[curLine].dialogText, data.contents[curLine].showA, data.contents[curLine].showB);
+        LoadContent(data.dataList[curLine].Dialogtext, data.dataList[curLine].Charaadisplay, data.dataList[curLine].Charabdisplay);
     }
 
     private void ShowUI()

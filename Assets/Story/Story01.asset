@@ -9,16 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0e28cf7afe7cdf4aab51921c83848cd, type: 3}
-  m_Name: dialog_01
+  m_Script: {fileID: 11500000, guid: eba1394a5c5eca140bd9734750ce6bda, type: 3}
+  m_Name: Story01
   m_EditorClassIdentifier: 
-  contents:
-  - dialogText: 1
-    showA: 1
-    showB: 0
-  - dialogText: 2
-    showA: 0
-    showB: 1
-  - dialogText: 3
-    showA: 1
-    showB: 1
+  SheetName: Assets/Story/Story01.xls
+  WorksheetName: Story01
+  dataArray: []
+  dataList: []

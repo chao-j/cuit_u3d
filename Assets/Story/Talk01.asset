@@ -13,9 +13,6 @@ MonoBehaviour:
   m_Name: Talk01
   m_EditorClassIdentifier: 
   contents:
-  - dialogText: 111
+  - dialogText: "\u8FD9\u91CC\u4EC0\u4E48\u90FD\u6CA1\u6709..."
     showA: 1
     showB: 0
-  - dialogText: 222
-    showA: 0
-    showB: 1
